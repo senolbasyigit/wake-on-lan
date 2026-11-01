@@ -1,17 +1,38 @@
-# wake_on_lan_app
+# wake-on-lan
 
-A new Flutter project.
+Small Wake-on-LAN app for Android and Windows, built with Flutter. Save your machines once, wake them with one tap.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Save devices with a name, MAC address and broadcast address
+- Sends a standard magic packet over UDP
+- Works on Android and Windows
 
-A few resources to get you started if this is your first Flutter project:
+## Setup
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+```
+flutter pub get
+flutter run
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Releases:
+
+```
+flutter build apk --release
+flutter build windows --release
+```
+
+## Target machine setup
+
+The app only sends the packet. The machine you want to wake has to be configured for it:
+
+- Enable Wake-on-LAN in the BIOS/UEFI (on ASUS boards: Power On By PCI-E, and ErP Ready disabled)
+- Enable magic packet wake in the network adapter settings
+- Turn off Fast Startup in Windows
+- Connect it with an Ethernet cable; Wi-Fi usually doesn't work
+
+The sending device must be on the same network. If the default broadcast address (`255.255.255.255`) doesn't work, set your subnet's broadcast address (for example `192.168.0.255`) when adding the device.
+
+## License
+
+MIT
